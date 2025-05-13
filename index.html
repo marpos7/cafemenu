@@ -67,7 +67,7 @@
 
     form {
       margin-top: 20px;
-      display: flex;
+      display: none;
       flex-direction: column;
       gap: 15px;
     }
@@ -132,34 +132,28 @@
     let main = document.getElementById("main");
     let errorDiv = document.getElementById("error");
 
-    // Слушаем нажатие кнопки "Купить", чтобы показать форму
     buy.addEventListener("click", () => {
       form.style.display = "flex";
       buy.style.display = "none";
 
-      // Подставляем имя и фамилию из Telegram WebApp
       const user = tg.initDataUnsafe?.user;
       if (user) {
         document.getElementById("user_name").value = user.first_name + " " + (user.last_name || "");
       }
     });
 
-    // Слушаем отправку формы
     order.addEventListener("click", (e) => {
-      e.preventDefault(); // Останавливаем отправку формы
+      e.preventDefault();
       let name = document.getElementById("user_name").value;
       let email = document.getElementById("user_email").value;
       let phone = document.getElementById("user_phone").value;
-
-      // Сбрасываем ошибку перед проверкой
-      errorDiv.innerText = "";
 
       // Проверка на правильность введенных данных
       if (phone.length < 5) {
         errorDiv.innerText = "Ошибка в номере телефона";
         return;
       }
-
+      
       if (email.length < 5) {
         errorDiv.innerText = "Ошибка в email";
         return;
