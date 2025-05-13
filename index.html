@@ -103,6 +103,18 @@
       color: red;
       margin-top: 10px;
     }
+
+    .success-message {
+      font-size: 18px;
+      color: green;
+      margin-top: 20px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
   </style>
 </head>
 
@@ -119,17 +131,17 @@
       <input type="text" placeholder="Телефон" id="user_phone" required>
       <button type="submit" id="order">Оформить</button>
     </form>
+
     <div id="error"></div>
   </div>
 
   <script src="https://telegram.org/js/telegram-web-app.js?57"></script>
   <script>
-    let tg = window.Telegram.WebApp;
-    let buy = document.getElementById("buy");
-    let order = document.getElementById("order");
-
-    let form = document.getElementById("form");
-    let errorDiv = document.getElementById("error");
+    const tg = window.Telegram.WebApp;
+    const buy = document.getElementById("buy");
+    const order = document.getElementById("order");
+    const form = document.getElementById("form");
+    const errorDiv = document.getElementById("error");
 
     buy.addEventListener("click", () => {
       form.style.display = "flex";
@@ -144,14 +156,12 @@
     order.addEventListener("click", (e) => {
       e.preventDefault();
 
-      // Очистка ошибки
       errorDiv.innerText = "";
 
-      let name = document.getElementById("user_name").value.trim();
-      let email = document.getElementById("user_email").value.trim();
-      let phone = document.getElementById("user_phone").value.trim();
+      const name = document.getElementById("user_name").value.trim();
+      const email = document.getElementById("user_email").value.trim();
+      const phone = document.getElementById("user_phone").value.trim();
 
-      // Проверки
       if (phone.length < 5) {
         errorDiv.innerText = "Ошибка в номере телефона";
         return;
@@ -162,23 +172,19 @@
         return;
       }
 
-      // Создание объекта и отправка
-      let data = {
-    name: name,
-    email: email,
-    phone: phone
-  };
+      const data = {
+        name: name,
+        email: email,
+        phone: phone
+      };
 
-  // Отправляем данные в Telegram
-  tg.sendData(JSON.stringify(data));
+      tg.sendData(JSON.stringify(data));
 
-  // Показываем подтверждение
-  form.innerHTML = "<p><b>✅ Данные получены! Спасибо за заказ.</b></p>";
+      form.innerHTML = `<p class="success-message">✅ Данные получены! Спасибо за заказ.</p>`;
 
-  // (опционально) Закрыть веб-приложение через 2 сек
-  setTimeout(() => {
-    tg.close();
-  }, 2000);
+      setTimeout(() => {
+        tg.close();
+      }, 2000);
     });
   </script>
 </body>
