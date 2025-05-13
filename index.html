@@ -164,15 +164,21 @@
 
       // Создание объекта и отправка
       let data = {
-        name: name,
-        email: email,
-        phone: phone
-      };
+    name: name,
+    email: email,
+    phone: phone
+  };
 
-      tg.sendData(JSON.stringify(data));
+  // Отправляем данные в Telegram
+  tg.sendData(JSON.stringify(data));
 
-      // Закрытие WebApp
-      tg.close();
+  // Показываем подтверждение
+  form.innerHTML = "<p><b>✅ Данные получены! Спасибо за заказ.</b></p>";
+
+  // (опционально) Закрыть веб-приложение через 2 сек
+  setTimeout(() => {
+    tg.close();
+  }, 2000);
     });
   </script>
 </body>
