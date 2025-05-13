@@ -64,6 +64,40 @@
     button:hover {
       background-color: #0075b8;
     }
+
+    form {
+      margin-top: 20px;
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input[type="text"] {
+      padding: 10px 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      border-color: #0088cc;
+      outline: none;
+    }
+
+    #order {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #order:hover {
+      background-color: #218838;
+    }
   </style>
 </head>
 
@@ -73,8 +107,37 @@
     <img src="https://cdn.pixabay.com/photo/2024/01/01/13/55/strong-8481378_1280.jpg" alt="Еда">
     <p>Заказать еду с доставкой</p>
     <button id="buy">Купить</button>
+
+    <form id="form">
+      <input type="text" placeholder="Имя" id="user_name" required>
+      <input type="text" placeholder="Email" id="user_email" required>
+      <input type="text" placeholder="Телефон" id="user_phone" required>
+      <button type="submit" id="order">Оформить</button>
+    </form>
   </div>
 
   <script src="https://telegram.org/js/telegram-web-app.js?57"></script>
+  <script>
+    let tg = window.Telegram.WebApp;
+    let buy = document.getElementById("buy");
+    let order = document.getElementById("order");
+    let form = document.getElementById("form");
+    let main = document.getElementById("main");
+
+    buy.addEventListener("click", () => {
+      form.style.display = "flex";
+      buy.style.display = "none";
+
+      const user = tg.initDataUnsafe?.user;
+      if (user) {
+        document.getElementById("user_name").value = user.first_name + " " + (user.last_name || "");
+      }
+    });
+
+    order.addEventListener("click", (e) => {
+      e.preventDefault(); // чтобы форма не перезагружала страницу
+      tg.close(); // закрыть WebApp после оформления
+    });
+  </script>
 </body>
 </html>
