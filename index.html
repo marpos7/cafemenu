@@ -98,6 +98,11 @@
     #order:hover {
       background-color: #218838;
     }
+
+    #error {
+      color: red;
+      margin-top: 10px;
+    }
   </style>
 </head>
 
@@ -114,6 +119,7 @@
       <input type="text" placeholder="Телефон" id="user_phone" required>
       <button type="submit" id="order">Оформить</button>
     </form>
+    <div id="error"></div>
   </div>
 
   <script src="https://telegram.org/js/telegram-web-app.js?57"></script>
@@ -121,8 +127,10 @@
     let tg = window.Telegram.WebApp;
     let buy = document.getElementById("buy");
     let order = document.getElementById("order");
+
     let form = document.getElementById("form");
     let main = document.getElementById("main");
+    let errorDiv = document.getElementById("error");
 
     buy.addEventListener("click", () => {
       form.style.display = "flex";
@@ -135,8 +143,24 @@
     });
 
     order.addEventListener("click", (e) => {
-      e.preventDefault(); // чтобы форма не перезагружала страницу
-      tg.close(); // закрыть WebApp после оформления
+      e.preventDefault();
+      let name = document.getElementById("user_name").value;
+      let email = document.getElementById("user_email").value;
+      let phone = document.getElementById("user_phone").value;
+
+      // Проверка на правильность введенных данных
+      if (phone.length < 5) {
+        errorDiv.innerText = "Ошибка в номере телефона";
+        return;
+      }
+      
+      if (email.length < 5) {
+        errorDiv.innerText = "Ошибка в email";
+        return;
+      }
+
+      // Если все данные правильные, закрываем веб-приложение
+      tg.close();
     });
   </script>
 </body>
