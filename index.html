@@ -1,24 +1,80 @@
 <!DOCTYPE HTML>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Shop</title>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Онлайн Магазин</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    #main {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #0088cc;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0075b8;
+    }
+  </style>
 </head>
+
 <body>
-    <div id = 'main'>
-        <h1>Онлайн магазин</h1>
-       <img src="https://cdn.pixabay.com/photo/2024/01/01/13/55/strong-8481378_1280.jpg" style="width: 200px; max-width: 100%; height: auto; border-radius: 12px;">
-        <p>Заказать еду с доставкой</p>
-        <button id = "buy">Купить</button>
-    </div>
+  <div id="main">
+    <h1>Онлайн магазин</h1>
+    <img src="https://cdn.pixabay.com/photo/2024/01/01/13/55/strong-8481378_1280.jpg" alt="Еда">
+    <p>Заказать еду с доставкой</p>
+    <button id="buy">Купить</button>
+  </div>
 
-
-
-
-
+  <script src="https://telegram.org/js/telegram-web-app.js?57"></script>
 </body>
 </html>
-
