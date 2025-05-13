@@ -129,7 +129,6 @@
     let order = document.getElementById("order");
 
     let form = document.getElementById("form");
-    let main = document.getElementById("main");
     let errorDiv = document.getElementById("error");
 
     buy.addEventListener("click", () => {
@@ -144,22 +143,35 @@
 
     order.addEventListener("click", (e) => {
       e.preventDefault();
-      let name = document.getElementById("user_name").value;
-      let email = document.getElementById("user_email").value;
-      let phone = document.getElementById("user_phone").value;
 
-      // Проверка на правильность введенных данных
+      // Очистка ошибки
+      errorDiv.innerText = "";
+
+      let name = document.getElementById("user_name").value.trim();
+      let email = document.getElementById("user_email").value.trim();
+      let phone = document.getElementById("user_phone").value.trim();
+
+      // Проверки
       if (phone.length < 5) {
         errorDiv.innerText = "Ошибка в номере телефона";
         return;
       }
-      
-      if (email.length < 5) {
+
+      if (email.length < 5 || !email.includes("@")) {
         errorDiv.innerText = "Ошибка в email";
         return;
       }
 
-      // Если все данные правильные, закрываем веб-приложение
+      // Создание объекта и отправка
+      let data = {
+        name: name,
+        email: email,
+        phone: phone
+      };
+
+      tg.sendData(JSON.stringify(data));
+
+      // Закрытие WebApp
       tg.close();
     });
   </script>
